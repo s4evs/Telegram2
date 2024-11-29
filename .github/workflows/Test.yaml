@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Start Building...
+    name: Start Building..
     runs-on: ubuntu-latest
     
     steps:
