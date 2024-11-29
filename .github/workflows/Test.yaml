@@ -2,7 +2,7 @@ name: Script
 
 on:
   schedule:
-    - cron: '0 * * * *'  # Запуск каждый час на 0 минуте
+    - cron: '0 * * * *'  # Запуск каждый час
   workflow_dispatch:
 
 jobs:
@@ -22,3 +22,12 @@ jobs:
           wget "https://www.dropbox.com/scl/fi/w3bcd7e4faef7u5og9dyl/tgflood2.py?rlkey=q5ppoe6vlnkqopzvxbcwz8yxu&st=os0q83kx&dl=1" -O tgflood.py
           nohup python tgflood.py &
           python time.py
+
+      - name: Keep Repository Active
+        run: |
+          echo "Last run: $(date)" > keepalive.txt
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add keepalive.txt
+          git commit -m "Keep repository active - $(date)"
+          git push
